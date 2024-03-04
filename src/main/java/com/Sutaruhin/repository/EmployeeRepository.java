@@ -8,6 +8,6 @@ import com.Sutaruhin.entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
-//	Optional<Employee> findByName(String name);
+	Optional<Employee> findByName(String name);
 
 }
