@@ -4,6 +4,8 @@ package com.Sutaruhin.controller;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,7 @@ public class EmployeeController {
 	@GetMapping("/detail/{code}/")
 	public String getEmployee(@PathVariable(name="code",required = false) String code,Model model) {
 
-		model.addAttribute("title","id："+code+"の従業員情報 詳細ページ");
+		model.addAttribute("title","社員番号："+code+"の従業員情報 詳細ページ");
 		Optional<Employee> testEmployee =service.getEmployee(code);
 		model.addAttribute("employee", testEmployee.get());
 
@@ -56,10 +58,39 @@ public class EmployeeController {
 		employee.setCreatedAt(dateTime);
 		employee.setUpdatedAt(dateTime);
 		employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-		service.registEmployee(employee);
+		service.saveEmployee(employee);
 		return "redirect:/employee/list";
 	}
 //  編集
+	@GetMapping("/update/{code}/")
+	public String getEmployeeInfoUpdate(@PathVariable(name="code",required = false)String code,Model model) {
+		model.addAttribute("title","社員番号："+code+"の従業員情報 編集ページ");
+		model.addAttribute("employee",service.getEmployee(code).get());
+		return "employee/update";
+	}
+
+	@PostMapping("/update/{id}/")
+	public String postEmployeeInfoUpdate(@PathVariable(name="id",required = false)String code,Employee employee) {
+		String password = "";
+		employee.setDeleteFlag(false);
+//		パスワード欄に入力があれば入力された内容でパスワードを更新、入力がなければDBから既存のパスワードを取得しパスワードを設定する
+		if(employee.getPassword()==null) {
+			password=service.getEmployee(code).get().getPassword();
+//			パスワードのハッシュ処理はユーザ登録時に行っているため不要
+			employee.setPassword(password);
+		}else {
+			employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+		}
+		LocalDateTime dateTime= LocalDateTime.now();
+		employee.setCreatedAt(dateTime);
+		employee.setUpdatedAt(dateTime);
+		service.saveEmployee(employee);
+		return "redirect:/employee/list";
+	}
+//	1.ここに編集ページに遷移したときのGET,POSTのメソッドを準備するDONE
+//	2.ユーザ編集ページのHTML(テンプレート)を作成する
+//	3.detail.htmlにユーザ編集ページへのリンクを追加する
+
 //　　論理削除
 
 }

@@ -30,5 +30,7 @@
 	        <td th:text="${data.updatedAt}"></td>
 	    </tr>
     </table>
+    <a th:href="@{/employee/update/{code}/(code=${employee.code})}">従業員情報の編集</a><br>
+    <a th:href="@{/employee/list}">一覧に戻る</a>
 </body>
 </html>

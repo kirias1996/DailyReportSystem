@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>従業員 編集ページ</title>
+
+</head>
+<body>
+
+	<h1 th:text="${title}"></h1>
+	<p>パスワードは変更する場合のみ入力してください。</p>
+	<form method="post"　th:action="@{/employee/update/{code}/(code=*{code})}" th:object="${employee}">
+		<label for="code">社員番号</label>
+		<input type="text" th:field="*{code}">
+		<br>
+		<label for="name">氏名</label>
+		<input type="text" th:field="*{name}">
+		<br>
+		<label for="password">パスワード</label>
+		<input type="password">
+		<br>
+		<label for="role">権限</label>
+		<input type="text" th:field="*{role}">
+		<br>
+		<input type = "submit" value="更新">
+		<br>
+	</form>
+	<a th:href="@{/employee/list}">従業員情報を削除する</a>
+	<br>
+	<a th:href="@{/employee/list}">更新せずに一覧に戻る</a>
+
+</body>
+</html>

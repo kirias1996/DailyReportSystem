@@ -28,7 +28,7 @@ public class EmployeeService {
 
 
 	@Transactional
-	public Employee registEmployee(Employee employee) {
+	public Employee saveEmployee(Employee employee) {
 		return repository.save(employee);
 	}
 }
