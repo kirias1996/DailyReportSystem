@@ -9,6 +9,7 @@
 
 	<h1 th:text="${title}"></h1>
 	<p>パスワードは変更する場合のみ入力してください。</p>
+	<div th:text="${duplicate_code_message}"></div>
 	<form method="post"　th:action="@{/employee/update/{code}/(code=*{code})}" th:object="${employee}">
 		<label for="code">社員番号</label>
 		<input type="text" th:field="*{code}">
@@ -17,7 +18,7 @@
 		<input type="text" th:field="*{name}">
 		<br>
 		<label for="password">パスワード</label>
-		<input type="password">
+		<input type="password" th:field="*{password}">
 		<br>
 		<label for="role">権限</label>
 		<input type="text" th:field="*{role}">

@@ -27,7 +27,6 @@ public class Employee {
 
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(length = 10)
 	String code;
 
