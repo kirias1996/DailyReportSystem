@@ -1,6 +1,7 @@
 package com.Sutaruhin.entity;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,6 +13,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "employee")
+@Where(clause = "delete_flag=0")
 public class Employee {
 	public static enum Role{
 		ADMIN("管理者"),GENERAL("一般");
@@ -45,6 +47,7 @@ public class Employee {
 
 	@Column(nullable = false)
 	private LocalDateTime createdAt;
+
 
 	@Column(nullable = false)
 	private LocalDateTime updatedAt;

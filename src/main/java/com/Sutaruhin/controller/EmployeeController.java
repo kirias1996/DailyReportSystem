@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService service;
-	private PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 //	複数の従業員情報の一覧表示
 	@GetMapping("/list")
