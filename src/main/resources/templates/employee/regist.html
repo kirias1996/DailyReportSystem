@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>従業員 新規登録ページ</title>
 
 </head>
 <body>
-
 	<h1>従業員 新規登録ページ</h1>
 	<form method="post"　th:action="@{/employee/regist}" th:object="${employee}">
 		<label for="code">社員番号</label>
@@ -19,7 +18,10 @@
 		<input type="text" th:field="*{password}">
 		<br>
 		<label for="role">権限</label>
-		<input type="text" th:field="*{role}">
+		<select th:field="*{role}">
+			<option value="" th:text="選択してください"></option>
+			<option th:each="item:${T(com.Sutaruhin.entity.Employee.Role).values()}" th:value="${item}" th:text="${item}" th:selected="*{role}== ${item}"></option>
+		</select>
 		<br>
 		<input type = "submit" value="新規登録">
 		<br>
