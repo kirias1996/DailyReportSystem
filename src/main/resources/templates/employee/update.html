@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>従業員 編集ページ</title>
@@ -21,12 +21,16 @@
 		<input type="password" th:field="*{password}">
 		<br>
 		<label for="role">権限</label>
-		<input type="text" th:field="*{role}">
+		<select th:field="*{role}">
+			<option value="" th:text="選択してください"></option>
+			<option th:each="item:${T(com.sutaruhin.entity.Employee.Role).values()}" th:value="${item.getValue()}" th:text="${item}"></option>
+		</select>
+		<!--<input type="text" th:field="*{role}">-->
 		<br>
 		<input type = "submit" value="更新">
 		<br>
 	</form>
-	<a th:href="@{/employee/list}">従業員情報を削除する</a>
+	<a th:href="@{/employee/delete/{id}/(id=*{code})}">従業員情報を削除する</a>
 	<br>
 	<a th:href="@{/employee/list}">更新せずに一覧に戻る</a>
 
