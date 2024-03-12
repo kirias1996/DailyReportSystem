@@ -44,7 +44,7 @@ public class UserDetail implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return employee.getName();
+		return employee.getCode();
 	}
 
 
