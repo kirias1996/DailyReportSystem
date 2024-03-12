@@ -1,7 +1,6 @@
 package com.Sutaruhin.entity;
-
 import java.time.LocalDateTime;
-
+import org.hibernate.annotations.Where;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,10 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+@SuppressWarnings("deprecation")
 @Data
 @Entity
 @Table(name = "employee")
-@Where(clause = "delete_flag=0")
+@Where(clause = "delete_flag=false")
 public class Employee {
 	public static enum Role{
 		ADMIN("管理者"),GENERAL("一般");

@@ -102,12 +102,23 @@ public class EmployeeController {
 			LocalDateTime dateTime= LocalDateTime.now();
 			employee.setCreatedAt(dateTime);
 			employee.setUpdatedAt(dateTime);
-			service.updateEmployee(employee.getCode(), employee.getName(), employee.getRole(),employee.getPassword(), employee.getUpdatedAt());
+			service.updateEmployee(employee.getCode(), employee.getName(), employee.getRole(),employee.getPassword(), employee.getUpdatedAt(),false);
 		}
 
 		return "redirect:/employee/list";
 	}
 //　　論理削除
+	@GetMapping("delete/{id}/")
+	public String deleteEmployee(@PathVariable(name = "id",required = false)String id,Model model) {
+//		Employee employee;
+//		従業員オブジェクトを取得する
+		Optional<Employee> employeeInfo = service.getEmployee(id);
+		Employee employee = employeeInfo.get();
+		employee.setDeleteFlag(true);
+		service.updateEmployee(employee.getCode(), employee.getName(), employee.getRole(),employee.getPassword(), employee.getUpdatedAt(),true);
+
+		return "redirect:/employee/list";
+	}
 
 //	社員番号重複チェック処理
 	public boolean checkDuplicateCode(Employee employee) {

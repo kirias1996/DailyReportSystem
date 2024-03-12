@@ -35,7 +35,7 @@ public class EmployeeService {
 	}
 
 	@Transactional
-	public void updateEmployee(String code, String name, Role role,String password,LocalDateTime updatedAt) {
-		repository.employeeUpdate(code, name, role,password, updatedAt);
+	public void updateEmployee(String code, String name, Role role,String password,LocalDateTime updatedAt,boolean deleteFlag) {
+		repository.employeeUpdate(code, name, role,password, updatedAt,deleteFlag);
 	}
 }

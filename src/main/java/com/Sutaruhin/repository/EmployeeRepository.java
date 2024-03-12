@@ -14,8 +14,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 	Optional<Employee> findByName(String name);
 
 	@Modifying
-	@Query(value = "UPDATE Employee e SET e.name = :name,e.role = :role, e.password = :password, e.updatedAt = :updatedAt where e.code = :code")
-	public void employeeUpdate(@Param("code")String code,@Param("name") String name,@Param("role")Role role, @Param("password") String password,@Param("updatedAt") LocalDateTime updatedAt);
+	@Query(value = "UPDATE Employee e SET e.name = :name,e.role = :role, e.password = :password, e.updatedAt = :updatedAt,e.deleteFlag = :deleteFlag where e.code = :code")
+	public void employeeUpdate(@Param("code")String code,@Param("name") String name,@Param("role")Role role, @Param("password") String password,@Param("updatedAt") LocalDateTime updatedAt,@Param("deleteFlag") boolean deleteFlag);
 //	public void employeeUpdate(@Param("code")String code,@Param("name") String name);
 
 //	@Query(value = "SELECT e FROM Employee e")
