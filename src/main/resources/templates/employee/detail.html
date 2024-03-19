@@ -23,11 +23,11 @@
 		</tr>
 		<tr>
 			<th>登録日時</th>
-			<td th:text="${data.createdAt}"></td>
+			<td th:text="${#temporals.format(data.createdAt,'yyyy/MM/dd HH:mm:ss')}"></td>
 		</tr>
 	    <tr >
 	        <th>更新日時</th>
-	        <td th:text="${data.updatedAt}"></td>
+	        <td th:text="${#temporals.format(data.updatedAt,'yyyy/MM/dd HH:mm:ss')}"></td>
 	    </tr>
     </table>
     <a th:href="@{/employee/update/{code}/(code=${employee.code})}">従業員情報の編集</a><br>

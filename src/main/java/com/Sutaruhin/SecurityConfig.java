@@ -18,7 +18,7 @@ public class SecurityConfig {
 			.formLogin(form -> form
 					.loginPage("/login")
 					.failureUrl("/login?failure")
-					.defaultSuccessUrl("/employee/list",true))
+					.defaultSuccessUrl("/",true))
 			.exceptionHandling(deny -> deny
 					.accessDeniedPage("/display-access-denied")
 					)

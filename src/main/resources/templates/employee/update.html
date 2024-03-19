@@ -3,33 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>従業員 編集ページ</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 <body>
 
 	<h1 th:text="${title}"></h1>
 	<p>パスワードは変更する場合のみ入力してください。</p>
-	<div th:text="${duplicate_code_message}"></div>
+	<span th:if="${update_error_message != null}" th:text="${update_error_message}" class="err"></span>
 	<form method="post"　th:action="@{/employee/update/{code}/(code=*{code})}" th:object="${employee}">
 		<label for="code">社員番号</label>
-		<input type="text" th:field="*{code}">
+		<input type="text" th:field="*{code}"　 th:errorclass="err">
+		<span th:errors="*{code}" class="err"></span>
 		<br>
 		<label for="name">氏名</label>
-		<input type="text" th:field="*{name}">
+		<input type="text" th:field="*{name}" th:errorclass="err">
+		<span th:errors="*{name}" class="err"></span>
 		<br>
 		<label for="password">パスワード</label>
 		<input type="password" th:field="*{password}">
 		<br>
 		<label for="role">権限</label>
-		<select th:field="*{role}">
+		<select th:field="*{role}" th:errorclass="err">
 			<option value="" th:text="選択してください"></option>
 			<option th:each="item:${T(com.Sutaruhin.entity.Employee.Role).values()}" th:value="${item}" th:text="${item}" th:selected="*{role}== ${item}"></option>
 		</select>
+		<span th:errors="*{role}" class="err"></span>
 		<br>
 		<input type = "submit" value="更新">
 		<br>
 	</form>
-	<a th:href="@{/employee/delete/{id}/(id=*{code})}">従業員情報を削除する</a>
+	<a th:href="@{/employee/delete/{code}/(code=*{code})}">従業員情報を削除する</a>
 	<br>
 	<a th:href="@{/employee/list}">更新せずに一覧に戻る</a>
 

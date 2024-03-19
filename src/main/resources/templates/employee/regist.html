@@ -3,25 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>従業員 新規登録ページ</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 <body>
 	<h1>従業員 新規登録ページ</h1>
+	<div th:if="${duplicate_code_message != null}" th:text="${duplicate_code_message}" class="err"></div>
 	<form method="post"　th:action="@{/employee/regist}" th:object="${employee}">
 		<label for="code">社員番号</label>
-		<input type="text" th:field="*{code}">
+		<input type="text" th:field="*{code}" th:errorclass="err">
+		<span th:errors="*{code}" class="err"></span>
 		<br>
 		<label for="name">氏名</label>
-		<input type="text" th:field="*{name}">
+		<input type="text" th:field="*{name}" th:errorclass="err">
+		<span th:errors="*{name}" class="err"></span>
 		<br>
 		<label for="password">パスワード</label>
-		<input type="text" th:field="*{password}">
+		<input type="text" th:field="*{password}" th:errorclass="err">
+		<span th:if="${password_error_message != null}" th:text="${password_error_message}" class="err"></span>
 		<br>
 		<label for="role">権限</label>
-		<select th:field="*{role}">
+		<select th:field="*{role}" th:errorclass="err">
 			<option value="" th:text="選択してください"></option>
 			<option th:each="item:${T(com.Sutaruhin.entity.Employee.Role).values()}" th:value="${item}" th:text="${item}" th:selected="*{role}== ${item}"></option>
 		</select>
+		<span th:errors="*{role}" class="err"></span>
 		<br>
 		<input type = "submit" value="新規登録">
 		<br>
